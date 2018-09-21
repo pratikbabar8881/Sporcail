@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Sporcial</string>
+    <string name="admin_selector">Select admin</string>
+    <string-array name="admin_arrays">
+        <item> Service Provider </item>
+        <item> Facility Provider </item>
+        <item> Equipment Provider </item>
+
+    </string-array>
+</resources>
