@@ -7,11 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import app.sporcial.pos.R;
+import app.sporcial.pos.model.SignInDTO;
+import app.sporcial.pos.remote.RetrofitClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -58,16 +65,37 @@ public class SignUpActivity extends AppCompatActivity {
 
                 else if (!get_email.equals("") && !get_password.equals("") &&
                         !get_conpassword.equals("") && !get_mobile.equals("")) {
+
                     Intent in = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(in);
+
+
                 }
+
+                SignInDTO signInDTO=new SignInDTO(email.getText().toString(),password.getText().toString(),confirm_password.getText().toString(),mobile.getText().toString());
+
+                Call<ResponseBody> call = RetrofitClient.getInstance().getApi().createSignUp(signInDTO);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                            Toast.makeText(SignUpActivity.this,response.getClass().toString(),Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        Toast.makeText(SignUpActivity.this,t.getMessage().toString(),Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
 
             }
         });
-
-
     }
-
 
     private boolean isValidEmail(String email) {
 

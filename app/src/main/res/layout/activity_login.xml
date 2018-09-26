@@ -28,8 +28,7 @@
         android:background="@drawable/textborder"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="10dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
+        android:hint="Username"
         android:maxLines="1"
         android:padding="10dp"
         />

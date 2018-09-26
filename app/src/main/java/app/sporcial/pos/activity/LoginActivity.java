@@ -23,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText email,password;
+    EditText username,password;
     Button login,signin;
     private String TAG = "login";
 
@@ -33,20 +33,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email=findViewById(R.id.et_username);
+        username=findViewById(R.id.et_username);
         password=findViewById(R.id.et_password);
         login=findViewById(R.id.bt_submit);
         signin=findViewById(R.id.bt_login_signin);
 
-         LoginDTO loginDTO =  new LoginDTO(email.getText().toString(),password.getText().toString());
+         LoginDTO loginDTO =  new LoginDTO(username.getText().toString(),password.getText().toString());
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Call<ResponseBody> call =RetrofitClient.getInstance().getApi().createUser(email.getText().toString(),password.getText().toString());
+                Call<ResponseBody> call =RetrofitClient.getInstance().getApi().createUser(username.getText().toString(),password.getText().toString());
 
-                Call<ResponseBody> call = RetrofitClient.getInstance().getApi().createUser(loginDTO);
+                //Call<ResponseBody> call = RetrofitClient.getInstance().getApi().createUser(loginDTO);
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
                         Toast.makeText(LoginActivity.this,s,Toast.LENGTH_LONG).show();
                         Log.d(TAG, "onResponse: "+s);
 
