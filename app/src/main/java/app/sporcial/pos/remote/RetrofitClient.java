@@ -2,6 +2,7 @@ package app.sporcial.pos.remote;
 
 
 import app.sporcial.pos.activity.APIService;
+import app.sporcial.pos.utils.Constants;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -16,7 +17,7 @@ public class RetrofitClient
     private RetrofitClient()
     {
         retrofit = new Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(Constants.DEBUG_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

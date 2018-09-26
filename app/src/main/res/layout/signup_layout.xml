@@ -122,23 +122,52 @@
         android:layout_marginBottom="12dp"
         android:layout_below="@+id/tv_mobile"/>
 
-    <Spinner
-        android:id="@+id/sp_list"
+
+
+    <!--<Spinner-->
+        <!--android:id="@+id/sp_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:entries="@array/admin_arrays"-->
+        <!--android:prompt="@string/admin_selector"-->
+        <!--android:layout_below="@id/et_mobile"-->
+        <!--android:layout_marginTop="12dp"-->
+        <!--android:layout_marginStart="11dp"-->
+        <!--&gt;-->
+    <!--</Spinner>-->
+
+    <TextView
+        android:id="@+id/tv_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/admin_arrays"
-        android:prompt="@string/admin_selector"
-        android:layout_below="@id/et_mobile"
+        android:text="username"
         android:layout_marginTop="12dp"
-        android:layout_marginStart="11dp"
-        >
-    </Spinner>
+        android:layout_marginStart="12dp"
+        android:layout_below="@+id/et_mobile"
+        android:textColor="@android:color/black"
+        />
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:layout_below="@id/tv_username"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:drawablePadding="10dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/textborder"
+        />
+
+
 
     <Button
         android:id="@+id/bt_login_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sp_list"
+        android:layout_below="@+id/et_username"
        android:layout_centerInParent="true"
         android:layout_marginTop="35dp"
         android:textColor="@android:color/white"

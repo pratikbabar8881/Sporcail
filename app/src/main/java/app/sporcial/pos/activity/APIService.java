@@ -24,7 +24,7 @@ public interface APIService
     Call<ResponseBody> createUser(@Body LoginDTO loginDTO);
 
 */
- @POST("signup/")
+ @POST("vendor/signup/")
     Call<ResponseBody> createSignUp(@Body SignInDTO signInDTO);
 
 }

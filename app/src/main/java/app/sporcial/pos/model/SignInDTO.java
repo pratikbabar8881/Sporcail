@@ -3,19 +3,14 @@ package app.sporcial.pos.model;
 public class SignInDTO
 {
 
-    private String email,password,con_password,mobile;
+    private String email,password,phone_no,username;
 
-
-
-    public SignInDTO(String email, String password ,String con_password ,String mobile)
-    {
+ /*   public SignInDTO(String email, String password, String phone_no, String username) {
         this.email = email;
         this.password = password;
-        this.con_password = con_password;
-        this.mobile = mobile;
-
-    }
-
+        this.phone_no = phone_no;
+        this.username = username;
+    }*/
 
     public String getEmail() {
         return email;
@@ -33,30 +28,29 @@ public class SignInDTO
         this.password = password;
     }
 
-    public String getCon_password() {
-        return con_password;
+    public String getPhone_no() {
+        return phone_no;
     }
 
-    public void setCon_password(String con_password) {
-        this.con_password = con_password;
+    public void setPhone_no(String phone_no) {
+        this.phone_no = phone_no;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getUsername() {
+        return username;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
 
     @Override
     public String toString() {
         return "SignInDTO{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", con_password='" + con_password + '\'' +
-                ", mobile=" + mobile +
+                ", phone_no='" + phone_no + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }

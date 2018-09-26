@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +23,8 @@ import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText email, password, confirm_password, mobile;
+    private static final String TAG = "signup" ;
+    EditText email, password, confirm_password, mobile, username;
     Button signup;
 
     @Override
@@ -34,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
         password = findViewById(R.id.et_password);
         confirm_password = findViewById(R.id.et_conpassword);
         mobile = findViewById(R.id.et_mobile);
+        username = findViewById(R.id.et_username);
 
         signup = findViewById(R.id.bt_login_signin);
 
@@ -46,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
                 final String get_password = password.getText().toString();
                 final String get_mobile = mobile.getText().toString();
                 final String get_conpassword = confirm_password.getText().toString();
+                final String get_username = username.getText().toString();
 
                 if (!isValidEmail(get_email)) {
                     email.setError("Invalid Email");
@@ -62,34 +66,48 @@ public class SignUpActivity extends AppCompatActivity {
                 else if (!isvalidMobile(get_mobile)) {
                     mobile.setError("Invalid Mobile");
                 }
+                else if(!isValidUser(get_username))
+                {
+                    username.setError("Invalid Username");
+                }
 
                 else if (!get_email.equals("") && !get_password.equals("") &&
                         !get_conpassword.equals("") && !get_mobile.equals("")) {
 
-                    Intent in = new Intent(SignUpActivity.this, LoginActivity.class);
-                    startActivity(in);
+                    //SignInDTO signInDTO=new SignInDTO(email.getText().toString(),password.getText().toString(),mobile.getText().toString(),username.getText().toString());
+                    SignInDTO signInDTO = new SignInDTO();
+                    signInDTO.setEmail(email.getText().toString());
+                    signInDTO.setPassword(password.getText().toString());
+                    signInDTO.setPhone_no(mobile.getText().toString());
+                    signInDTO.setUsername(username.getText().toString());
+
+                    Call<ResponseBody> call = RetrofitClient.getInstance().getApi().createSignUp(signInDTO);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                            Toast.makeText(SignUpActivity.this,response.message(),Toast.LENGTH_LONG).show();
+                           // Log.d(TAG, "onResponse: "+response.body().toString());
+
+
+                            Intent in = new Intent(SignUpActivity.this, LoginActivity.class);
+                            startActivity(in);
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                            Toast.makeText(SignUpActivity.this,t.getMessage().toString(),Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+
 
 
                 }
 
-                SignInDTO signInDTO=new SignInDTO(email.getText().toString(),password.getText().toString(),confirm_password.getText().toString(),mobile.getText().toString());
 
-                Call<ResponseBody> call = RetrofitClient.getInstance().getApi().createSignUp(signInDTO);
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                            Toast.makeText(SignUpActivity.this,response.getClass().toString(),Toast.LENGTH_LONG).show();
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                        Toast.makeText(SignUpActivity.this,t.getMessage().toString(),Toast.LENGTH_LONG).show();
-
-                    }
-                });
 
 
 
@@ -132,4 +150,15 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }
+
+    private boolean isValidUser(String username)
+    {
+        if(username!=null && username.length()<150)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
 }
