@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.LoginActivity"
+    android:background="@drawable/launching">
     <TextView
         android:id="@+id/tv_signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register Form"
         android:textSize="25sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@android:color/black"
         android:layout_marginStart="12dp"
         android:fontFamily="@font/akzentica4fmedium"
         />
@@ -32,8 +33,11 @@
         android:layout_height="40dp"
         android:padding="8dp"
         android:layout_below="@id/tv_email"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
+        android:drawablePadding="10dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
+        android:inputType="textEmailAddress"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
         android:background="@drawable/textborder"
@@ -58,6 +62,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawablePadding="10dp"
         android:padding="8dp"
         android:background="@drawable/textborder"
         android:inputType="textPassword"
@@ -81,6 +87,8 @@
         android:background="@drawable/textborder"
         android:padding="8dp"
         android:layout_marginStart="12dp"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:drawablePadding="10dp"
         android:layout_marginEnd="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
@@ -109,6 +117,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/textborder"
+        android:drawableLeft="@drawable/ic_phone_iphone_black_24dp"
+        android:drawablePadding="10dp"
         android:layout_marginBottom="12dp"
         android:layout_below="@+id/tv_mobile"/>
 
@@ -129,13 +139,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sp_list"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
+       android:layout_centerInParent="true"
+        android:layout_marginTop="35dp"
         android:textColor="@android:color/white"
         android:background="@drawable/button_selector"
         android:text="Submit"
-        android:elevation="10dp"
         />
 
 </RelativeLayout>

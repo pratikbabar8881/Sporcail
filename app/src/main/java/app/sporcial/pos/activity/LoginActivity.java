@@ -1,20 +1,32 @@
 package app.sporcial.pos.activity;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import app.sporcial.pos.R;
+import app.sporcial.pos.model.LoginDTO;
+import app.sporcial.pos.remote.RetrofitClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email,password;
     Button login,signin;
+    private String TAG = "login";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +38,46 @@ public class LoginActivity extends AppCompatActivity {
         login=findViewById(R.id.bt_submit);
         signin=findViewById(R.id.bt_login_signin);
 
+         LoginDTO loginDTO =  new LoginDTO(email.getText().toString(),password.getText().toString());
 
         login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Call<ResponseBody> call =RetrofitClient.getInstance().getApi().createUser(email.getText().toString(),password.getText().toString());
+
+                Call<ResponseBody> call = RetrofitClient.getInstance().getApi().createUser(loginDTO);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        String s = "";
+                        try {
+                            s = response.body().string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        Toast.makeText(LoginActivity.this,s,Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "onResponse: "+s);
+
+                        Intent in =new Intent(LoginActivity.this,FirstPageActivity.class);
+                        startActivity(in);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+
+
+            }
+        });
+
+
+        /*login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -55,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-
+*/
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
 
     private boolean isValidPassword(String password)
     {
