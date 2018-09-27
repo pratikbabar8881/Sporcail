@@ -1,6 +1,7 @@
 package app.sporcial.pos.activity;
 
 import app.sporcial.pos.model.LoginDTO;
+import app.sporcial.pos.model.LoginToken;
 import app.sporcial.pos.model.SignInDTO;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,11 +13,9 @@ import retrofit2.http.POST;
 public interface APIService
 {
 
-    @FormUrlEncoded
-    @POST("login/")
-    Call<ResponseBody> createUser(
-            @Field("username") String email_login,
-            @Field("password") String password_login);
+
+    @POST("vendor/login/")
+    Call<LoginToken> createLogin(@Body LoginDTO loginDTO);
 
 
 /*
