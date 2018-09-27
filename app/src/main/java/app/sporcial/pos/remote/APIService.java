@@ -1,4 +1,4 @@
-package app.sporcial.pos.activity;
+package app.sporcial.pos.remote;
 
 import app.sporcial.pos.model.LoginDTO;
 import app.sporcial.pos.model.LoginToken;

@@ -98,20 +98,14 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                             Toast.makeText(SignUpActivity.this,t.getMessage().toString(),Toast.LENGTH_LONG).show();
-
-                        }
+                            }
                     });
-
-
 
 
                 }
 
-
-
-
-
             }
+
         });
     }
 

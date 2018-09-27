@@ -16,7 +16,6 @@ import app.sporcial.pos.R;
 import app.sporcial.pos.model.LoginDTO;
 import app.sporcial.pos.model.LoginToken;
 import app.sporcial.pos.remote.RetrofitClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.et_email);
         password = findViewById(R.id.et_password);
         Button login = findViewById(R.id.bt_submit);
-        Button signin = findViewById(R.id.bt_login_signin);
+        //Button signup = findViewById(R.id.bt_login_signin);
 
         // LoginDTO loginDTO =  new LoginDTO(username.getText().toString(),password.getText().toString());
         login.setOnClickListener(new View.OnClickListener() {
@@ -113,12 +112,12 @@ public class LoginActivity extends AppCompatActivity {
         });
 */
 
-        signin.setOnClickListener(new View.OnClickListener() {
+        /*signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginActivity.this.startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
-        });
+        });*/
     }
 
     private boolean isValidEmail(String username) {
